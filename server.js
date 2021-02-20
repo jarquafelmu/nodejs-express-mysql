@@ -14,6 +14,8 @@ app.get(`/`, (req, res) => {
   res.json({ message: `Welcome to jarquafelmu application.` });
 });
 
+require("./app/routes/customer.routes.js")(app);
+
 // set port, listen for request
 // change port to 8080 before uploading to Elastic Beanstalk
 const port = 3000;
