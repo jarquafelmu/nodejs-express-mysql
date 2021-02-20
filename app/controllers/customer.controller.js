@@ -96,12 +96,12 @@ exports.delete = (req, res) => {
 
 // Delete all Customers from the database
 exports.deleteAll = (req, res) => {
-  Customer.findById(req.params.customerId, (err, data) => {
+  Customer.removeAll(req.params.customerId, (err, data) => {
     if (err)
       return res.status(500).send({
         message:
           err.message || `Some error occured while creating the Customer.`
       });
-    else res.send(data);
+    else res.send({ message: `All Customers were deleted successfully!` });
   });
 };
