@@ -77,7 +77,7 @@ exports.update = (req, res) => {
 
 // Delete a Customer with the specified customerId in the request
 exports.delete = (req, res) => {
-  Customer.findById(req.params.customerId, (err, data) => {
+  Customer.remove(req.params.customerId, (err, data) => {
     if (err) {
       if (err.kind === `not_found`)
         res.status(404).send({
@@ -87,7 +87,10 @@ exports.delete = (req, res) => {
         res.status(500).send({
           message: `Error retrieving Customer with id ${req.params.customerId}.`
         });
-    } else res.send(data);
+    } else
+      res.send({
+        message: `Customer was deleted with id ${req.params.customerId}.`
+      });
   });
 };
 
