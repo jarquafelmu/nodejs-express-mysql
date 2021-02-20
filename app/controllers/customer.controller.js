@@ -56,10 +56,49 @@ exports.findOne = (req, res) => {
 };
 
 // Update a Customer indentified by the customerId in the request
-exports.update = (req, res) => {};
+exports.update = (req, res) => {
+  Customer.updateById(
+    req.params.customerId,
+    new Customer(req.body),
+    (err, data) => {
+      if (err) {
+        if (err.kind === `not_found`)
+          res.status(404).send({
+            message: `Not found Customer with id ${req.params.customerId}.`
+          });
+        else
+          res.status(500).send({
+            message: `Error retrieving Customer with id ${req.params.customerId}.`
+          });
+      } else res.send(data);
+    }
+  );
+};
 
 // Delete a Customer with the specified customerId in the request
-exports.delete = (req, res) => {};
+exports.delete = (req, res) => {
+  Customer.findById(req.params.customerId, (err, data) => {
+    if (err) {
+      if (err.kind === `not_found`)
+        res.status(404).send({
+          message: `Not found Customer with id ${req.params.customerId}.`
+        });
+      else
+        res.status(500).send({
+          message: `Error retrieving Customer with id ${req.params.customerId}.`
+        });
+    } else res.send(data);
+  });
+};
 
 // Delete all Customers from the database
-exports.deleteAll = (req, res) => {};
+exports.deleteAll = (req, res) => {
+  Customer.findById(req.params.customerId, (err, data) => {
+    if (err)
+      return res.status(500).send({
+        message:
+          err.message || `Some error occured while creating the Customer.`
+      });
+    else res.send(data);
+  });
+};
