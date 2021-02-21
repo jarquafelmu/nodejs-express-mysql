@@ -62,7 +62,7 @@ Customer.updateById = (id, customer, result) => {
       }
       if (res.affectedRows == 0) return result({ kind: `not_found` }, null);
 
-      let customer = { id: id, ...customer };
+      customer = { id: id, ...customer };
       console.log(`updated customer: `, customer);
       result(null, customer);
     }
