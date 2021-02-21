@@ -57,6 +57,13 @@ exports.findOne = (req, res) => {
 
 // Update a Customer indentified by the customerId in the request
 exports.update = (req, res) => {
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: `Content cannot be empty!`
+    });
+  }
+
   Customer.updateById(
     req.params.customerId,
     new Customer(req.body),
