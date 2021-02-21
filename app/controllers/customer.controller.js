@@ -89,7 +89,7 @@ exports.delete = (req, res) => {
         });
     } else
       res.send({
-        message: `Customer was deleted with id ${req.params.customerId}.`
+        message: `Customer was deleted successfully!`
       });
   });
 };
