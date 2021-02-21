@@ -79,7 +79,7 @@ Customer.remove = (id, result) => {
     if (res.affectedRows == 0) return result({ kind: `not_found` }, null);
 
     console.log(`deleted customer with id: `, id);
-    result(null, customer);
+    result(null, res);
   });
 };
 
